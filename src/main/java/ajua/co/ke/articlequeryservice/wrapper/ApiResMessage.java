@@ -1,5 +1,6 @@
 package ajua.co.ke.articlequeryservice.wrapper;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -8,8 +9,11 @@ import java.util.ArrayList;
 public class ApiResMessage {
 
     public int page;
-    public int per_page;
+    @JsonProperty("per_page")
+    public int perPage;
     public int total;
-    public int total_pages;
+
+    @JsonProperty("total_pages")
+    public int totalPages;
     public ArrayList<Article> data;
 }

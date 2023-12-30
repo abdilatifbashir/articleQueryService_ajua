@@ -16,8 +16,8 @@ public class Utils {
 
     private List<Article> filterAndSortArticles(List<Article> articles) {
         return articles.stream()
-                .filter(article -> isTitleNotEmpty(article.getTitle()) || isTitleNotEmpty(article.getStory_title()))
-                .sorted(Comparator.comparing(Article::getNum_comments, Comparator.reverseOrder())
+                .filter(article -> isTitleNotEmpty(article.getTitle()) || isTitleNotEmpty(article.getStoryTitle()))
+                .sorted(Comparator.comparing(Article::getNumComments, Comparator.reverseOrder())
                         .thenComparing(Article::getTitle))
                 .collect(Collectors.toList());
     }
