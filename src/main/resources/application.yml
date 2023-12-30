@@ -1,0 +1,4 @@
+server:
+  port: 8080
+endpoints:
+  articleUrl: https://jsonmock.hackerrank.com/api/articles?page=
