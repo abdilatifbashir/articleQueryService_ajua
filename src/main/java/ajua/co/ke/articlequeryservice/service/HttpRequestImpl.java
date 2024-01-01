@@ -33,6 +33,7 @@ public class HttpRequestImpl implements HttpRequest {
                 .bodyToMono(ApiResMessage.class)
                 .map(result -> {
                     System.out.println("resulttt: " + result);
+
                     // call the method here
                     utils.topArticles(Integer.valueOf(limit),result.getData());
                     return new UniversalResponse(utils.generateReference(), "200", "success", utils.topArticles(Integer.valueOf(limit),result.getData()));

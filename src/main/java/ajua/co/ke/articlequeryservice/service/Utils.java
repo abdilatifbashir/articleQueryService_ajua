@@ -15,11 +15,12 @@ public class Utils {
 
 
     private List<Article> filterAndSortArticles(List<Article> articles) {
-        return articles.stream()
-                .filter(article -> isTitleNotEmpty(article.getTitle()) || isTitleNotEmpty(article.getStoryTitle()))
-                .sorted(Comparator.comparing(Article::getNumComments, Comparator.reverseOrder())
-                        .thenComparing(Article::getTitle))
-                .collect(Collectors.toList());
+            return articles.stream()
+                    .filter(article -> isTitleNotEmpty(article.getStoryTitle()) && isTitleNotEmpty(article.getTitle()))
+                    .sorted(Comparator.comparing(Article::getNumComments, Comparator.reverseOrder())
+                            .thenComparing(Article::getTitle))
+                    .collect(Collectors.toList());
+
     }
 
     private boolean isTitleNotEmpty(String title) {
@@ -29,15 +30,17 @@ public class Utils {
     public List<Article> topArticles(int limit, List<Article> articles) {
         List<Article> topArticles = new ArrayList<>();
 
-        while (!articles.isEmpty()) {
+        if (!articles.isEmpty()) {
             List<Article> filteredArticles = filterAndSortArticles(articles);
 
-            for (Article article : filteredArticles) {
-                topArticles.add(article);
-                if (topArticles.size() == limit) {
-                    return topArticles;
-                }
-            }
+          if(!filteredArticles.isEmpty()){
+              for (Article article : filteredArticles) {
+                  topArticles.add(article);
+                  if (topArticles.size() == limit) {
+                      return topArticles;
+                  }
+              }
+          }
         }
 
         return topArticles;
